@@ -10,7 +10,6 @@
 
 <body>
     <footer class="footer margen">
-        <hr />
         <div class="footer__eresVihda">
             <img src="{{ asset('assets/images/shared/footer/image_2.png') }}" alt="icono_eresVIHDA" />
         </div>
