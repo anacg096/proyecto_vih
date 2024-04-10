@@ -1,0 +1,16 @@
+@use 'variables';
+
+body {
+    margin: 0;
+    background-color: variables.$color-body;
+}
+
+.margen {
+    margin: 0 15vw;
+}
+
+@media only screen and (max-width: 767px) {
+    .margen {
+        margin: 0;
+    }
+}

@@ -1,0 +1,21 @@
+@font-face {
+    font-family: 'Gotham-Bold';
+    src: url('../../../../fonts/GothamBold.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Gotham-Book';
+    src: url('../../../../fonts/Gotham-Book.otf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+$font-titulo: 'Gotham-Bold';
+$font-normal: 'Gotham-Book';
+
+$color-header: #69BED3;
+$color-body: #F4F0E9;
+$color-navbar: #B4DFE9;
+$color-destacado: #3B96AC;

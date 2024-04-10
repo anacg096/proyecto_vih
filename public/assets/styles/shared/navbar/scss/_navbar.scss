@@ -1,0 +1,68 @@
+@use 'variables';
+
+.nav {
+    .nav__ul {
+        padding: 1rem 2vw;
+        background-color: variables.$color-navbar;
+        font-family: variables.$font-titulo;
+        list-style-type: none;
+        display: flex;
+        justify-content: space-evenly;
+        margin: 0;
+        align-items: center;
+
+        .ul__li {
+            display: inline;
+            font-size: 1.125rem;
+            text-align: center;
+            padding: 0.25rem;
+
+            .li__link {
+                text-decoration: none;
+                color: black;
+            }
+
+            .active {
+                color: white;
+            }
+        }
+
+        .link_destacado {
+            background-color: variables.$color-destacado;
+            padding: 0.5rem 1vw;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .nav {
+        .nav__ul {
+            justify-content: space-between;
+
+            .ul__li {
+                font-size: 1rem;
+
+                .active {
+                    color: black;
+                }
+            }
+
+            .link_destacado {
+                background-color: variables.$color-navbar;
+                padding: 0;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .nav {
+        .nav__ul {
+            padding: 1rem 0;
+
+            .ul__li {
+                font-size: 0.8rem;
+            }
+        }
+    }
+}

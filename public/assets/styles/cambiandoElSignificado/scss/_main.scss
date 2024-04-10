@@ -1,0 +1,74 @@
+@use 'variables';
+
+.main {
+    background-color: white;
+    font-family: variables.$font-normal;
+
+    .main__parrafo {
+        margin: 0 6vw;
+        padding: 3rem 0;
+        font-size: 1.375rem;
+
+        .destacado {
+            color: variables.$color-destacado;
+            font-weight: bold;
+        }
+    }
+
+    .main__bloque {
+        .bloque__video {
+            margin: 0 6vw;
+            width: auto;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            .video__imagen {
+                width: 100%;
+            }
+
+            .video__icono {
+                width: 4vw;
+                cursor: pointer;
+                position: absolute;
+            }
+        }
+    }
+
+    .main__container {
+        width: 100%;
+
+        .container__imagen {
+            padding-top: 3rem;
+            width: 100%;
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .main {
+        .main__bloque {
+            .bloque__video {
+                .video__icono {
+                    width: 3rem;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .main {
+        .main__bloque {
+            .main__parrafo {
+                font-size: 1rem;
+            }
+
+            .bloque__video {
+                .video__icono {
+                    width: 10vw;
+                }
+            }
+        }
+    }
+}

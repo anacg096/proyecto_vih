@@ -1,0 +1,25 @@
+.footer {
+  background-color: white;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: center;
+  border-top: 1px solid black;
+}
+.footer .footer__eresVihda {
+  display: flex;
+  width: 50%;
+  justify-content: right;
+  padding-right: 2rem;
+  align-items: center;
+  border-right: 1px solid #878787;
+}
+.footer .footer__gilead {
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  width: 50%;
+  padding-left: 2rem;
+}
+
+/*# sourceMappingURL=styles.css.map */

@@ -1,0 +1,46 @@
+
+@use 'variables';
+.header {
+    width: 100%;
+    background-color: variables.$color-header;
+    font-family: variables.$font-titulo;
+
+    .header__texto {
+        text-align: center;
+        background-color: variables.$color-cabecera;
+        color: black;
+        font-size: 0.75rem;
+        font-weight: bold;
+        overflow: hidden;
+    }
+
+    .header__container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .header {
+        .header__texto {
+            font-size: 0.5rem;
+        }
+
+        .header__container {
+            .container__imagen {
+                width: 100%;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    header {
+        .header__texto {
+            .texto_titulo {
+                font-size: 0.75rem;
+            }
+        }
+    }
+}

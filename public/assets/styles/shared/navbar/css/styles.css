@@ -1,0 +1,65 @@
+@font-face {
+  font-family: "Gotham-Bold";
+  src: url("../../../../fonts/GothamBold.otf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+@font-face {
+  font-family: "Gotham-Book";
+  src: url("../../../../fonts/Gotham-Book.otf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+}
+.nav .nav__ul {
+  padding: 1rem 2vw;
+  background-color: #B4DFE9;
+  font-family: "Gotham-Bold";
+  list-style-type: none;
+  display: flex;
+  justify-content: space-evenly;
+  margin: 0;
+  align-items: center;
+}
+.nav .nav__ul .ul__li {
+  display: inline;
+  font-size: 1.125rem;
+  text-align: center;
+  padding: 0.25rem;
+}
+.nav .nav__ul .ul__li .li__link {
+  text-decoration: none;
+  color: black;
+}
+.nav .nav__ul .ul__li .active {
+  color: white;
+}
+.nav .nav__ul .link_destacado {
+  background-color: #3B96AC;
+  padding: 0.5rem 1vw;
+}
+
+@media only screen and (max-width: 767px) {
+  .nav .nav__ul {
+    justify-content: space-between;
+  }
+  .nav .nav__ul .ul__li {
+    font-size: 1rem;
+  }
+  .nav .nav__ul .ul__li .active {
+    color: black;
+  }
+  .nav .nav__ul .link_destacado {
+    background-color: #B4DFE9;
+    padding: 0;
+  }
+}
+@media only screen and (max-width: 430px) {
+  .nav .nav__ul {
+    padding: 1rem 0;
+  }
+  .nav .nav__ul .ul__li {
+    font-size: 0.8rem;
+  }
+}
+
+/*# sourceMappingURL=styles.css.map */

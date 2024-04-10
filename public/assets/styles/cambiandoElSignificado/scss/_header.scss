@@ -1,0 +1,82 @@
+@use 'variables';
+
+.header {
+    width: 100%;
+    background-color: variables.$color-header;
+
+    .header__imagen {
+        position: relative;
+        height: 732px;
+        background-image: url(../../../images/cambiandoElSignificado/header/header1.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        .imagen__texto {
+            position: absolute;
+            color: black;
+            font-size: 3rem;
+            line-height: 6rem;
+            font-weight: bold;
+            font-family: variables.$font-titulo;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            letter-spacing: -1.38px;
+            top: 10vh;
+            left: 15vw;
+
+            .texto__titulo {
+                .titulo__movil {
+                    display: none;
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1440px) and (min-width: 768px) {
+    .header {
+        .header__imagen {
+            .imagen__texto {
+                font-size: 2.6rem;
+                line-height: 5.5rem;
+                top: 8vh;
+                left: 13vw;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .header {
+        .header__imagen {
+            background-image: url(../../../images/cambiandoElSignificado/header/header2.png);
+            height: 527px;
+
+            .imagen__texto {
+                top: 0vh;
+                left: 8vw;
+                font-size: 2rem;
+                line-height: 4rem;
+
+                .texto__titulo {
+                    .titulo__movil {
+                        display: block;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 430px) {
+    .header {
+        .header__imagen {
+            height: 300px;
+
+            .imagen__texto {
+                font-size: 1.3rem;
+                line-height: 2.75rem;
+            }
+        }
+    }
+}

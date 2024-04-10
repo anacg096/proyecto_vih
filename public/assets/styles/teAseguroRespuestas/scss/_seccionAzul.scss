@@ -1,0 +1,44 @@
+@use 'variables';
+
+.seccionAzul {
+    font-family: variables.$font-titulo;
+    height: 565px;
+    background-color: variables.$color-seccionAzul;
+    display: flex;
+    justify-content: space-around;
+
+    .seccionAzul__fondo {
+        width: 100%;
+        background-image: url(../../../images/teAseguroRespuestas/seccion_azul/CAMBIANDOSIGNIFICADO1_6.png);
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+
+        .fondo__cabecera {
+            color: black;
+            font-size: 2.5rem;
+            line-height: 3.75rem;
+            font-weight: bold;
+            margin-left: 19vw;
+            letter-spacing: -1.38px;
+        }
+    }
+}
+
+@media only screen and (max-width: 1440px) and (min-width: 768px) {
+    .seccionAzul {
+        height: 340px;
+        .seccionAzul__fondo {
+            .fondo__cabecera {
+                font-size: 2rem;
+                line-height: 3rem;
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 767px) {
+    .seccionAzul {
+        display: none;
+    }
+}
