@@ -6,7 +6,7 @@ $(document).ready(function () {
     $('[id^="info_"]').css('display', 'none');
 
     // Mostrar solo el primer bloque de información
-    $('#info_chemsex').css('display', 'block');
+    $('#info_CHEMSEX').css('display', 'block');
     
     elementosIconos.on('click', function () {
         mostrarInformacion(this);
