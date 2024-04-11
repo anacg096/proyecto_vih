@@ -28,6 +28,16 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        // Obtener los permisos del usuario autenticado
+        $permissions = auth()->user()->permissions;
+
+        // Verificar si el usuario tiene permiso para acceder al panel del administrador
+        if ($permissions['platform.index'] === "1") {
+            // Una vez autenticado y con permiso, se redirige al panel del administrador
+            return redirect()->route('platform.main');
+        }
+
+        //Una vez autenticado se redirige al panel del administrador
         return redirect()->intended(route('dashboard', absolute: false));
     }
 
