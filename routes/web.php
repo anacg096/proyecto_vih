@@ -1,25 +1,20 @@
 <?php
 
-use App\Http\Controllers\CambiandoElSignificadoController;
-use App\Http\Controllers\TeAseguroRespuestasController;
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 
-/* Route::get('/', function () {
+Route::get('/', function () {
     return view('welcome');
-}); */
-
-Route::get('/', [CambiandoElSignificadoController::class, 'index'])->name('index.cambiando');
-
-Route::get('/tar', [TeAseguroRespuestasController::class, 'index'])->name('index.tar');
-
-use App\Models\PreguntaFrecuente;
-
-Route::get('/prueba', function () {
-    $preguntas = PreguntaFrecuente::all();
-
-    foreach ($preguntas as $pregunta) {
-        var_dump($pregunta);
-    }
-
-    die();
 });
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+
+require __DIR__.'/auth.php';
