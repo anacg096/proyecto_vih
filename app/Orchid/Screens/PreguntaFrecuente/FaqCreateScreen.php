@@ -3,17 +3,16 @@
 namespace App\Orchid\Screens\PreguntaFrecuente;
 
 use App\Models\PreguntaFrecuente;
+use App\Orchid\Layouts\PreguntaFrecuente\FaqCreateLayout;
 use Illuminate\Http\Request;
-use Illuminate\Http\RedirectResponse;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Screen;
-use Orchid\Screen\TD;
+use Orchid\Support\Color;
+use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
-class FaqScreen extends Screen
+
+class FaqCreateScreen extends Screen
 {
     /**
      * @var PreguntaFrecuente
@@ -25,9 +24,11 @@ class FaqScreen extends Screen
      *
      * @return array
      */
-    public function query(): iterable
+    public function query(PreguntaFrecuente $pregunta_frecuente): iterable
     {
-        return [];
+        return [
+            'pregunta_frecuente' => $pregunta_frecuente
+        ];
     }
 
     /**
@@ -45,7 +46,7 @@ class FaqScreen extends Screen
      */
     public function description(): ?string
     {
-        return 'Nombre, imagen, título y contenido de la pregunta frecuente';
+        return 'Crea la información';
     }
 
     /**
@@ -56,9 +57,9 @@ class FaqScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-            Link::make(__('Add'))
-                ->icon('bs.plus-circle')
-                ->href(route('platform.faq.edit')),
+            Button::make('Crear')
+                ->icon('pencil')
+                ->method('createOrUpdate')
         ];
     }
 
@@ -70,72 +71,33 @@ class FaqScreen extends Screen
     public function layout(): iterable
     {
         return [
-            Layout::table('preguntas_frecuentes', [
-                TD::make('name'),
-                TD::make('image'),
-                TD::make('title'),
-                TD::make('content'),
-                TD::make('actions')
-                    ->render(function (PreguntaFrecuente $pregunta) {
-                        return Button::make('Editar')
-                            ->icon('pencil')
-                            ->method('edit')
-                            ->parameters(['pregunta' => $pregunta->id]);
-                    }),
-            ]),
-    
-            Layout::modal('preguntaFrecuenteModal', Layout::rows([
-                Input::make('pregunta_frecuente.name')
-                    ->title('Nombre')
-                    ->placeholder('Ingrese el nombre de la pregunta frecuente')
-                    ->help('El nombre de la pregunta frecuente a crear.'),
-                Input::make('pregunta_frecuente.image')
-                    ->title('Imagen')
-                    ->placeholder('Ingrese la URL de la imagen')
-                    ->help('La URL de la imagen asociada a la pregunta frecuente.'),
-                Input::make('pregunta_frecuente.title')
-                    ->title('Título')
-                    ->placeholder('Ingrese el título de la pregunta frecuente')
-                    ->help('El título de la pregunta frecuente.'),
-                Input::make('pregunta_frecuente.content')
-                    ->title('Contenido')
-                    ->placeholder('Ingrese el contenido de la pregunta frecuente')
-                    ->help('El contenido de la pregunta frecuente.'),
-            ]))
-                ->title('Crear Pregunta Frecuente')
-                ->applyButton('Crear Pregunta Frecuente'),
+            Layout::block(FaqCreateLayout::class)
+                ->title(__('Profile Information'))
+                ->description(__('Crea nuevas preguntas frecuentes.'))
+                ->commands(
+                    Button::make(__('Crear'))
+                        ->type(Color::BASIC)
+                        ->icon('bs.check-circle')
+                        ->method('create')
+                ),
         ];
     }
 
     /**
+     * Crea una nueva pregunta frecuente.
+     *
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(PreguntaFrecuente $pregunta, Request $request)
+    public function create(Request $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'image' => 'required|string|max:255',
-            'title' => 'required|string|max:255',
-            'content' => 'required|string',
-        ]);
+        // Rellena los datos del modelo de PreguntaFrecuente con los valores del formulario en la solicitud
+        // a través de $request->get('faq'), luego guarda los cambios en la base de datos.
+        $this->pregunta_frecuente->fill($request->get('faq'))->save();
 
-        $pregunta->update($request->only('name', 'image', 'title', 'content'));
+        Alert::info('Pregunta Frecuente creada correctamente');
 
-        Toast::info(__('Faq was saved.'));
+        return redirect()->route('platform.faq');
     }
 
-    /**
-     *
-     * @param \App\Models\PreguntaFrecuente  $pregunta
-     *
-     * @throws \Exception
-     *
-     * @return \Illuminate\Http\RedirectResponse
-     */
-    public function remove(PreguntaFrecuente $pregunta)
-    {
-        $pregunta->remove();
-
-        Toast::info(__('Faq was removed'));
-    }
 }

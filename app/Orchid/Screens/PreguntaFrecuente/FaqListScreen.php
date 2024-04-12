@@ -5,12 +5,7 @@ namespace App\Orchid\Screens\PreguntaFrecuente;
 use App\Models\PreguntaFrecuente;
 use App\Orchid\Layouts\PreguntaFrecuente\FaqListLayout;
 use Orchid\Screen\Screen;
-use Orchid\Screen\Actions\Button;
 use Orchid\Screen\Actions\Link;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\TD;
-use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class FaqListScreen extends Screen
 {
@@ -23,7 +18,7 @@ class FaqListScreen extends Screen
     {
         /* Necesario para que te coja los datos de la base de datos y luego los pinte */
         return [
-            'preguntas_frecuentes' => PreguntaFrecuente::all(),
+            'preguntas_frecuentes' => PreguntaFrecuente::paginate()
         ];
     }
 
@@ -52,11 +47,10 @@ class FaqListScreen extends Screen
      */
     public function commandBar(): iterable
     {
-
         return [
-            Link::make(__('Add'))
+            Link::make('Crear nueva pregunta')
                 ->icon('bs.plus-circle')
-                ->href(route('platform.faqs.create')),
+                ->route('platform.faqs.create')
         ];
     }
 

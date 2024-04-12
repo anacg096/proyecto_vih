@@ -6,13 +6,10 @@ use App\Models\PreguntaFrecuente;
 use App\Orchid\Layouts\PreguntaFrecuente\FaqEditLayout;
 use Illuminate\Http\Request;
 use Orchid\Screen\Actions\Button;
-use Orchid\Screen\Fields\Input;
-use Orchid\Screen\Fields\TextArea;
 use Orchid\Screen\Screen;
 use Orchid\Support\Color;
 use Orchid\Support\Facades\Alert;
 use Orchid\Support\Facades\Layout;
-use Orchid\Support\Facades\Toast;
 
 class FaqEditScreen extends Screen
 {
@@ -40,7 +37,7 @@ class FaqEditScreen extends Screen
      */
     public function name(): ?string
     {
-        return $this->pregunta_frecuente->exists ? 'Editar una pregunta frecuente' : 'Crear una nueva pregunta frecuente';
+        return 'Editar una pregunta frecuente';
     }
 
     /**
@@ -48,7 +45,7 @@ class FaqEditScreen extends Screen
      */
     public function description(): ?string
     {
-        return $this->pregunta_frecuente->exists ? 'Edita la información' : 'Crea la información';
+        return 'Edita la información';
     }
 
     /**
@@ -59,15 +56,10 @@ class FaqEditScreen extends Screen
     public function commandBar(): iterable
     {
         return [
-
-            Button::make(__('Save'))
-                ->icon('bs.check-circle')
-                ->method('save'),
-
-            Button::make(__('Remove'))
-                ->icon('bs.trash3')
-                ->method('remove')
-                ->canSee($this->pregunta_frecuente->exists),
+            Button::make('Modificar')
+                ->icon('pencil')
+                ->method('update')
+                ->canSee(!$this->pregunta_frecuente->exists),
         ];
     }
 
@@ -79,61 +71,59 @@ class FaqEditScreen extends Screen
     public function layout(): iterable
     {
         return [
-
+            // Se hace este bloque para que visualmente esté montado como Roles y Users
             Layout::block(FaqEditLayout::class)
                 ->title(__('Profile Information'))
                 ->description(__('Modifica la información de las preguntas frecuentes.'))
                 ->commands(
-                    Button::make(__('Save'))
+                    // Pinta el botón de debajo de los input 
+                    Button::make(__('Modificar'))
                         ->type(Color::BASIC)
                         ->icon('bs.check-circle')
-                        ->canSee($this->pregunta_frecuente->exists)
-                        ->method('save')
+                        ->canSee(!$this->pregunta_frecuente->exists)
+                        ->method('update')
                 ),
         ];
     }
 
     /**
+     * Actualiza una pregunta frecuente existente.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function save(Request $request, PreguntaFrecuente $faq)
-    {
-        // Validar los datos del formulario
-        $request->validate([
-            'faq.name' => 'required|max:255',
-            'faq.image' => 'required|max:255',
-            'faq.title' => 'required|max:255',
-            'faq.content' => 'required',
-        ]);
+    public function update(Request $request, $faq)
+    {   
+        // Esto busca una instancia de PreguntaFrecuente en la base de datos utilizando la variable $faq cuyo valor es el id
+        $preguntaFrecuente = PreguntaFrecuente::findOrFail($faq);
 
-        // Llenar el modelo FAQ con los datos del formulario
-        $faq->fill($request->input('faq'));
+        // Rellena los datos del modelo de PreguntaFrecuente con los valores del formulario en la solicitud
+        // a través de $request->get('faq'), luego guarda los cambios en la base de datos.
+        $preguntaFrecuente->fill($request->get('faq'))->save();
 
-        // Guardar el modelo actualizado en la base de datos
-        $faq->save();
+        Alert::info('Pregunta Frecuente actualizada correctamente');
 
-        // Mostrar un mensaje de confirmación
-        Toast::info(__('La pregunta frecuente fue guardada'));
-
-        // Redirigir al usuario a la página de preguntas frecuentes
         return redirect()->route('platform.faq');
     }
 
     /**
-     * Elimina una pregunta frecuente.
+     * Borra una pregunta frecuente existente.
      *
-     * @param  \App\Models\PreguntaFrecuente  $faq
      * @return \Illuminate\Http\RedirectResponse
-     * @throws \Exception
      */
-    public function remove(PreguntaFrecuente $faq)
+    public function remove($id)
     {
-        $faq->delete();
+        //  Esto busca una instancia de PreguntaFrecuente en la base de datos utilizando el valor de $id proporcionado.
+        $preguntaFrecuente = PreguntaFrecuente::findOrFail($id);
+
+        // Para borrar el dato
+        $preguntaFrecuente->delete();
 
         // Muestra un mensaje de confirmación utilizando el servicio Toast de Orchid
-        Toast::info(__('La pregunta frecuente fue eliminada'));
+        Alert::info(__('La pregunta frecuente fue eliminada correctamente'));
 
-        // Redirige al usuario a alguna página deseada después de eliminar la pregunta frecuente
-        return redirect()->route('platform.faq.index');
+        // Redirige al usuario a la página donde se muestra la tabla de preguntas frecuentes
+        return redirect()->route('platform.faq');
     }
 }

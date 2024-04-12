@@ -66,10 +66,8 @@ class FaqListLayout extends Table
 
                         Button::make(__('Delete'))
                             ->icon('bs.trash3')
-                            ->confirm(__('Once the faq is deleted, all of its resources and data will be permanently deleted. Before deleting your account, please download any data or information that you wish to retain.'))
-                            ->method('remove', [
-                                'id' => $faq->id,
-                            ]),
+                            ->confirm(__('Una vez que se elimine la pregunta frecuente, todos sus recursos y datos se eliminarán de forma permanente. Antes de eliminarlo, por favor descargue cualquier dato o información que desee conservar.'))
+                            ->route('platform.faqs.remove', $faq->id)
                     ])),
         ];
     }

@@ -2,6 +2,7 @@
 
 declare(strict_types=1);
 
+use App\Http\Controllers\PreguntaFrecuenteController;
 use App\Orchid\Screens\Examples\ExampleActionsScreen;
 use App\Orchid\Screens\Examples\ExampleCardsScreen;
 use App\Orchid\Screens\Examples\ExampleChartsScreen;
@@ -12,6 +13,7 @@ use App\Orchid\Screens\Examples\ExampleLayoutsScreen;
 use App\Orchid\Screens\Examples\ExampleScreen;
 use App\Orchid\Screens\Examples\ExampleTextEditorsScreen;
 use App\Orchid\Screens\PlatformScreen;
+use App\Orchid\Screens\PreguntaFrecuente\FaqCreateScreen;
 use App\Orchid\Screens\PreguntaFrecuente\FaqEditScreen;
 use App\Orchid\Screens\PreguntaFrecuente\FaqListScreen;
 use App\Orchid\Screens\PreguntaFrecuente\FaqScreen;
@@ -87,6 +89,17 @@ Route::screen('roles', RoleListScreen::class)
         ->parent('platform.index')
         ->push(__('Roles'), route('platform.systems.roles')));
 
+
+/* Route::screen('faqs', FaqListScreen::class)
+    ->name('platform.faq');
+
+Route::screen('faqs/{faq}/edit', FaqEditScreen::class)
+    ->name('platform.faqs.edit');
+
+Route::screen('faqs/create', FaqEditScreen::class)
+    ->name('platform.faqs.create'); */
+
+
 Route::screen('faqs', FaqListScreen::class)
     ->name('platform.faq')
     ->breadcrumbs(function (Trail $trail) {
@@ -95,7 +108,7 @@ Route::screen('faqs', FaqListScreen::class)
             ->push('faqs');
     });
 
-Route::screen('faqs/create', FaqEditScreen::class)
+Route::screen('faqs/create', FaqCreateScreen::class)
     ->name('platform.faqs.create')
     ->breadcrumbs(fn (Trail $trail) => $trail
         ->parent('platform.faq')
@@ -107,8 +120,12 @@ Route::screen('faqs/{faq}/edit', FaqEditScreen::class)
         ->parent('platform.faq')
         ->push(__('Edit'), route('platform.faqs.edit', $faq)));
 
-/* Route::screen('faqs', FaqListScreen::class)
-    ->name('platform.faq.list'); */
+// Son necesarios estas rutas por POST para eliminar y modificar los registros de bbdd
+Route::post('faqs/remove/{id}', [FaqEditScreen::class, 'remove'])
+    ->name('platform.faqs.remove');
+
+Route::post('faqs/update/{faq}', [FaqEditScreen::class, 'update'])
+    ->name('platform.faqs.update');
 
 // Example...
 Route::screen('example', ExampleScreen::class)
