@@ -98,6 +98,17 @@ class FaqEditScreen extends Screen
         // Esto busca una instancia de PreguntaFrecuente en la base de datos utilizando la variable $faq cuyo valor es el id
         $preguntaFrecuente = PreguntaFrecuente::findOrFail($faq);
 
+        // Verificar si se cargó una nueva imagen en el campo input
+        if ($request->hasFile('faq.image')) {
+            // Procesar y guardar la nueva imagen
+            $image = $request->file('faq.image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('assets/images/teAseguroRespuestas/iconos'), $imageName);
+
+            // Actualizar el nombre de la imagen en el modelo de PreguntaFrecuente
+            $preguntaFrecuente->image = $imageName;
+        }
+
         // Rellena los datos del modelo de PreguntaFrecuente con los valores del formulario en la solicitud
         // a través de $request->get('faq'), luego guarda los cambios en la base de datos.
         $preguntaFrecuente->fill($request->get('faq'))->save();

@@ -40,11 +40,11 @@
                 <!-- El primero tiene que llevar la clase icono_activo -->
                 @if($pregunta->name === "CHEMSEX")
                 <div id="icono_{{ str_replace(' ', '', $pregunta->name) }}" class="container__icono icono_activo">
-                    <img class="icono__imagen" src="{{ asset($pregunta->image) }}" alt="icono_{{ str_replace(' ', '', $pregunta->name) }}" />
+                    <img class="icono__imagen" src="{{ asset('assets/images/teAseguroRespuestas/iconos/' . $pregunta->image) }}" alt="icono_{{ str_replace(' ', '', $pregunta->name) }}" />
                 </div>
                 @else
                 <div id="icono_{{ str_replace(' ', '', $pregunta->name) }}" class="container__icono">
-                    <img class="icono__imagen" src="{{ asset($pregunta->image) }}" alt="icono_{{ str_replace(' ', '', $pregunta->name) }}" />
+                    <img class="icono__imagen" src="{{ asset('assets/images/teAseguroRespuestas/iconos/' . $pregunta->image) }}" alt="icono_{{ str_replace(' ', '', $pregunta->name) }}" />
                 </div>
                 @endif
                 <p class="icono_nombre">{{ $pregunta->name }}</p>
@@ -58,7 +58,7 @@
             <div class="informacion__bloque">
                 <div class="bloque__icono">
                     <div class="icono__movil">
-                        <img class="movil__imagen" src="{{ asset($pregunta->image) }}" alt="icono_{{ str_replace(' ', '', $pregunta->name) }}" />
+                        <img class="movil__imagen" src="{{ asset('assets/images/teAseguroRespuestas/iconos/' . $pregunta->image) }}" alt="icono_{{ str_replace(' ', '', $pregunta->name) }}" />
                     </div>
                 </div>
 

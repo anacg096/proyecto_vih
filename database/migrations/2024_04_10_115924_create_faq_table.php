@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('preguntas_frecuentes', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('image');
+            $table->binary('image');
             $table->string('title');
             $table->longText('content');
             $table->timestamps();

@@ -36,13 +36,13 @@ class FaqListLayout extends Table
                         ->route('platform.faqs.edit', $preguntaFrecuente);
                 }),
             TD::make('image', 'Imagen')
-                ->style('max-width: 4rem')
+                ->style('max-width: 1rem')
                 ->render(function (PreguntaFrecuente $preguntaFrecuente) {
                     return Link::make($preguntaFrecuente->image)
                         ->route('platform.faqs.edit', $preguntaFrecuente);
                 }),
             TD::make('title', 'Título')
-                ->style('max-width: 7rem')
+                ->style('max-width: 10rem')
                 ->render(function (PreguntaFrecuente $preguntaFrecuente) {
                     return Link::make($preguntaFrecuente->title)
                         ->route('platform.faqs.edit', $preguntaFrecuente);
@@ -53,18 +53,18 @@ class FaqListLayout extends Table
                     return Link::make($preguntaFrecuente->content)
                         ->route('platform.faqs.edit', $preguntaFrecuente);
                 }),
-            TD::make(__('Actions'))
+            TD::make(__('Acciones'))
                 ->align(TD::ALIGN_CENTER)
                 ->width('100px')
                 ->render(fn (PreguntaFrecuente $faq) => DropDown::make()
                     ->icon('bs.three-dots-vertical')
                     ->list([
 
-                        Link::make(__('Edit'))
+                        Link::make(__('Editar'))
                             ->route('platform.faqs.edit', $faq->id)
                             ->icon('bs.pencil'),
 
-                        Button::make(__('Delete'))
+                        Button::make(__('Borrar'))
                             ->icon('bs.trash3')
                             ->confirm(__('Una vez que se elimine la pregunta frecuente, todos sus recursos y datos se eliminarán de forma permanente. Antes de eliminarlo, por favor descargue cualquier dato o información que desee conservar.'))
                             ->route('platform.faqs.remove', $faq->id)

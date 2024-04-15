@@ -102,11 +102,9 @@ Route::screen('faqs/create', FaqEditScreen::class)
 
 Route::screen('faqs', FaqListScreen::class)
     ->name('platform.faq')
-    ->breadcrumbs(function (Trail $trail) {
-        return $trail
-            ->parent('platform.index')
-            ->push('faqs');
-    });
+    ->breadcrumbs(fn (Trail $trail) => $trail
+        ->parent('platform.index')
+        ->push(__('Faqs'), route('platform.faq')));
 
 Route::screen('faqs/create', FaqCreateScreen::class)
     ->name('platform.faqs.create')
@@ -126,6 +124,8 @@ Route::post('faqs/remove/{id}', [FaqEditScreen::class, 'remove'])
 
 Route::post('faqs/update/{faq}', [FaqEditScreen::class, 'update'])
     ->name('platform.faqs.update');
+
+    
 
 // Example...
 Route::screen('example', ExampleScreen::class)

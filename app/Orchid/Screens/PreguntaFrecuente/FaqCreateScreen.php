@@ -59,7 +59,7 @@ class FaqCreateScreen extends Screen
         return [
             Button::make('Crear')
                 ->icon('pencil')
-                ->method('createOrUpdate')
+                ->method('create')
         ];
     }
 
@@ -91,9 +91,25 @@ class FaqCreateScreen extends Screen
      */
     public function create(Request $request)
     {
-        // Rellena los datos del modelo de PreguntaFrecuente con los valores del formulario en la solicitud
-        // a través de $request->get('faq'), luego guarda los cambios en la base de datos.
-        $this->pregunta_frecuente->fill($request->get('faq'))->save();
+        // Valida el formulario
+        $request->validate([
+            'faq.image' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+        ]);
+
+        // Se procesa y se guarda la imagen
+        if ($request->hasFile('faq.image')) {
+            $image = $request->file('faq.image');
+            $imageName = time() . '.' . $image->getClientOriginalExtension();
+            $image->move(public_path('assets/images/teAseguroRespuestas/iconos'), $imageName);
+
+            // Asignar el nombre de la imagen al modelo de pregunta frecuente
+            $requestData = $request->get('faq');
+            $requestData['image'] = $imageName;
+        }
+
+        // Crear una nueva instancia de PreguntaFrecuente con los datos del formulario
+        $preguntaFrecuente = new PreguntaFrecuente($requestData);
+        $preguntaFrecuente->save();
 
         Alert::info('Pregunta Frecuente creada correctamente');
 

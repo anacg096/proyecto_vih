@@ -2,7 +2,6 @@
 
 namespace App\Orchid\Layouts\PreguntaFrecuente;
 
-use App\Models\PreguntaFrecuente;
 use Orchid\Screen\Field;
 use Orchid\Screen\Fields\Input;
 use Orchid\Screen\Fields\TextArea;
@@ -26,9 +25,8 @@ class FaqCreateLayout extends Rows
                 ->title(__('Nombre'))
                 ->placeholder(__('Nombre')),
 
-            Input::make('faq.image')
-                ->type('text')
-                ->max(255)
+                Input::make('faq.image')
+                ->type('file')
                 ->required()
                 ->title(__('Imagen'))
                 ->placeholder(__('Imagen')),

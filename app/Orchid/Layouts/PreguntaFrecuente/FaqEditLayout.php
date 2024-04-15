@@ -29,6 +29,9 @@ class FaqEditLayout extends Rows
             return Redirect::to('admin/faqs')->send();
         }
 
+        // Se obtiene la URL completa de la imagen actual
+        $imageUrl = $faq ? asset('assets/images/teAseguroRespuestas/iconos/' . $faq->image) : null;
+
         return [
             Input::make('faq.id')
                 ->type('int')
@@ -46,12 +49,11 @@ class FaqEditLayout extends Rows
                 ->value($faq ? $faq->name : ""),
 
             Input::make('faq.image')
-                ->type('text')
-                ->max(255)
-                ->required()
-                ->title(__('Imagen'))
-                ->placeholder(__('Imagen'))
-                ->value($faq ? $faq->image : ""),
+                ->type('file')
+                ->title(__('Imagen actual'))
+                ->placeholder(__('Imagen actual'))
+                ->value($imageUrl)
+                ->help("introduzca la nueva imagen en este campo si desea cambiarla"),
 
             Input::make('faq.title')
                 ->type('text')
