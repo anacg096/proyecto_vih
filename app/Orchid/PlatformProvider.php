@@ -77,9 +77,9 @@ class PlatformProvider extends OrchidServiceProvider
                 ->route('platform.systems.roles')
                 ->permission('platform.systems.roles'),
                 
-
+            // Se añade el enlace al crud de preguntas frecuentes en el nav del /main de orchid
             Menu::make('Preguntas Frecuentes')
-                ->icon('bag')
+                ->icon('bs.card-list')
                 ->route('platform.faq')
                 ->divider(),
 
