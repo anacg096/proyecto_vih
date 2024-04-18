@@ -33,7 +33,7 @@ class AuthenticatedSessionController extends Controller
 
         // Verificar si el usuario tiene permiso para acceder al panel del administrador
         // Se contemplan las dos posibilidades, que el campo sea 1 o true
-        if ($permissions['platform.index'] === "1" | $permissions['platform.index'] === true) {
+        if ($permissions['platform.index'] === "1" || $permissions['platform.index'] === true) {
             // Una vez autenticado y con permiso, se redirige al panel del administrador
             return redirect()->route('platform.main');
         }
