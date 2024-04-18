@@ -68,7 +68,6 @@ Configure your .env with your database conection
     (1, 'admin', 'admin@admin.com', NULL, '$2y$12$.eO1bLb/FhFakz8ImqojueLBtyJg5u0459SdfrxNqfYks1KSo/LFC', 'lscMwGNVJKHuAqlUjrxAl7VFzxNiYaeRaY6GW6g2uEzaHmFzZr0k9wCv6h7R', '2024-04-12 08:28:51', '2024-04-12 08:28:51', '{\"platform.index\": true, \"platform.systems.roles\": true, \"platform.systems.users\": true, \"platform.systems.attachment\": true}'),
     (2, 'user', 'user@user.com', NULL, '$2y$12$5Z2XU/B.8l602JqPhfdH7.rcyr1eNd.e6QSCNZosYjNjB8pF6.O6i', NULL, '2024-04-12 08:35:27', '2024-04-12 08:35:27', NULL),
     (3, 'a', 'a@a.com', NULL, '$2y$12$5uQ7ki2li1KPpujB0OPzbeqXP3IMwsCfgLn8G98LJ16S9ScWD3OaS', NULL, '2024-04-12 08:39:40', '2024-04-12 08:39:40', NULL);
-    COMMIT;
 ```
 
 4. Finally start the server
